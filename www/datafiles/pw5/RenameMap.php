@@ -16,7 +16,7 @@ function die1($str){
   error_log(__FILE__.": $str");
   exit();
 }
-
+define("NotAllowedChars",["|","/"]); //altered
 foreach(["uname","password"] as $a) if(empty($_POST[$a])) die1("$a parameter is empty!");
 extract($_POST,EXTR_SKIP);
 
@@ -24,10 +24,14 @@ foreach(array("mapname","mapname2") as $a){
   $pos=strpos($$a,"/");
   if($pos!==false) die1("Invalid character \"/\" at column $pos of param \"$a\"!");
 }
-foreach(array("|","/") as $a){
+foreach(NotAllowedChars as $a){
   $pos=strpos($uname,$a);
   if($pos!==false) die1("Invalid character \"$a\" at column $pos of param \"uname\"!");
 }
+//begin altered code
+rename("WorkMaps/$mapname","WorkMaps/$mapname2");
+exit();
+//end altered code
 
 $database=scandir("Database");
 array_shift($database); array_shift($database); sort($database);

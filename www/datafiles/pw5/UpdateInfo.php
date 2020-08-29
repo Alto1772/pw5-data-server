@@ -17,8 +17,11 @@ function die1($str){
   error_log(__FILE__.": $str");
   exit();
 }
+//begin altered code; does nothing
+exit();
+//end altered code
 
-//foreach(["uname","password","kills","deaths","gameplays"] as $a) empty($_POST[$a])&&die1("$a parameter is empty!");
+foreach(["uname","password","kills","deaths","gameplays"] as $a) empty($_POST[$a])&&die1("$a parameter is empty!");
 extract($_POST,EXTR_SKIP); $name=$uname;
 foreach(array("|","/") as $a){
   $pos=strpos($uname,$a);

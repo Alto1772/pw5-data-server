@@ -1,1 +1,2 @@
-www/datafiles/pw5/UserMaps
+www/datafiles/pw5/WorkMaps/*
+!www/datafiles/pw5/WorkMaps/.keep

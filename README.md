@@ -12,9 +12,7 @@ uses [lighttpd](https://lighttpd.net) and [php](https://php.net)
 
 `www/datafiles/pw5/GameMaps/` - default preinstalled maps for guest rooms
 
-`www/datafiles/pw5/UserMaps/` - user maps for login
-
-`www/datafiles/pw5/Database/` - user login info database without sql *(not included in their server)*
+`www/datafiles/pw5/WorkMaps/` - user maps for login
 
 `server.conf` - lighttpd configuration
 

@@ -22,11 +22,14 @@
    if unset:
    "no data found"
 */
-//die("Login Done|${_POST["name"]}|0|0|0|0|290000||");
 
+define("NotAllowedChars",["|"]); //altered
 foreach(["name","password"] as $a) empty($_POST[$a])&&die("$a parameter is empty!");
 extract($_POST,EXTR_SKIP);
-foreach(array("|","/") as $a)($pos=strpos($name,$a))!==false&&die("Invalid <b>$a</b> at column <color=yellow>$pos</color>!");
+foreach(NotAllowedChars as $a)($pos=strpos($name,$a))!==false&&die("Invalid <b>$a</b> at column <color=yellow>$pos</color>!");
+//begin altered code
+die("Login Done|$name|0|0|0|0|1||");
+//end altered code
 $database=scandir("Database");
 array_shift($database); array_shift($database); sort($database);
 foreach($database as $i){
@@ -44,4 +47,3 @@ foreach($database as $i){
 
 if($exists) print("Login Done|$name|$kills|$deaths|$gameplays|0|$i||");
 else print("User <color=#FF4E50>$name </color>does not exist \n");
-//echo "Login Done|$name|10|10|10|0|290000||";

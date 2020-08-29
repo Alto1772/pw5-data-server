@@ -11,7 +11,7 @@
    if not:
    empty string
 */
-
+define("NotAllowedChars",["/","|"]); //altered
 function die1($str){
   error_log(__FILE__.": $str");
   exit();
@@ -19,11 +19,14 @@ function die1($str){
 
 foreach(["uname","password"] as $a) if(empty($_POST[$a])) die1("$a parameter is empty!");
 extract($_POST,EXTR_SKIP);
-foreach(array("|","/") as $a){
+foreach(NotAllowedChars as $a){
   $pos=strpos($uname,$a);
   if($pos!==false) die1("Invalid character \"$a\" at column $pos of param \"uname\"!");
 }
-
+//begin altered code
+foreach(array_diff(scandir("WorkMaps"),array('.','..')) as $i) $str.="~$i";
+die($str);
+//end altered code
 $database=scandir("Database");
 array_shift($database); array_shift($database); sort($database);
 foreach($database as $i){

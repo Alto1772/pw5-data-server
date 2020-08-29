@@ -16,7 +16,11 @@
    if not:
    "A user with this name already exists,\n please choose another one!"
 */
-define("PlayerCount",290000);
+//begin altered code; does nothing
+die("Not Implemented!");
+//end altered code
+
+define("PlayerCount",10);
 define("NotAllowedChars",["|","/"]);
 
 foreach(["name","password","hash"] as $a) empty($_POST[$a])&&die("$a parameter is empty!");

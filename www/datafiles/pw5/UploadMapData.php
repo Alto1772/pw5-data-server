@@ -28,11 +28,16 @@ $uname=&$pname;
 
 $pos=strpos($mname,"/");
 $pos===false or die1("Illegal character \"/\" at column $pos for param \"mname\"!");
+//begin altered code
+file_exists("WorkMaps/$mname") or mkdir("WorkMaps/$mname");
+file_put_contents("WorkMaps/$mname/$fname",$fdata);
+exit();
+//end altered code
 foreach(array("|","/") as $a){
   $pos=strpos($uname,$a);
   if($pos!==false) die1("Illegal character \"$a\" at column $pos for param \"uname\"!");
 }
-
+$exists=false;
 $database=scandir("Database");
 array_shift($database); array_shift($database); sort($database);
 foreach($database as $i){
@@ -48,13 +53,6 @@ foreach($database as $i){
 }
 
 $dir="UserMaps/$uname/$mname";
-if(!$exists){
-  warning("User $uname does not exist!");
-  $dir="InvalidNames/$mname";
-}
-if(!file_exists("UserMaps/$uname")){
-  warning("$uname's folder does not exist!");
-  $dir="InvalidNames/$mname";
-}
+$exists or die1("User $uname does not exist!");
 file_exists($dir) or mkdir($dir);
 file_put_contents("$dir/$fname",$fdata);
